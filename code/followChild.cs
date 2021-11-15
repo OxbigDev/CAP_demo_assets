@@ -4,36 +4,27 @@ using UnityEngine;
 
 public class followChild : MonoBehaviour
 {
-    
-    // Here we assign values which are unique to this
-    Vector3 deltapos;
-    // This static keyword is called an accessor method
-    // essentially it means that this variable will never change in value
-    static Vector3 childpos;
+
+    // Assign pulbic Variables for use in the unity editor
+    [Header("Assign player object")]
+    [Tooltip("Drag and drop the object you want the camera to follow here.")]
+    public GameObject ball;
+
+    // Assign the consisent offset for the camera
+    static Vector3 camOffset;
 
     // Start is called before the first frame update
     void Start()
     {
-        // get the position of the child in world coordinates
-        childpos = UpdateChildPos();
-        // delta from player to cam
-        // this is a constant value used to calulate the new coordinates of the camera
-        deltapos = this.transform.position - childpos;
+        // The distance from the ball to the camera
+        camOffset = this.transform.position - ball.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // calculate new position
-        this.transform.position = childpos + deltapos;
-        
-        // Update the position of the ball
-        childpos = UpdateChildPos();        
-    }
 
-    Vector3 UpdateChildPos()
-    {
-        // get the position of the ball and conver the local coordinates of the ball to world coordinates
-        return transform.TransformPoint(this.gameObject.transform.GetChild(0).position);
+        // Update the camera position to the position of the ball
+        this.transform.position = ball.transform.position + camOffset;
     }
 }

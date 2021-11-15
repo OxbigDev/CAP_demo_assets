@@ -41,7 +41,7 @@ public class floorTilt : MonoBehaviour
         // A quaternion is a special type of 4D number used for tracking rotation
         // this command converts our Vector3 phone input into a quaternion
         // read more here: https://docs.unity3d.com/ScriptReference/Quaternion.Euler.html
-        Quaternion target = Quaternion.Euler(phoneTilt * tiltSpeed);
+        Quaternion target = Quaternion.Euler(phoneTilt.y * tiltSpeed*2, 0, -phoneTilt.x *tiltSpeed);
 
         // before we update the rotation of the floor we need to create some boundaries
         // if we don't do this our playing space will be doing barrel rolls
